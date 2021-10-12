@@ -6,6 +6,54 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .bg-image {
+      /* Full height */
+      height: 50%;
+
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    /* Images used */
+    .img1 { background-image: url("/assets/images/1.jpg"); }
+    .img1 { background-image: url("/assets/images/2.jpg"); }
+    .img2 { background-image:  url("/assets/images/3.jpg");}
+    .img3 { background-image:  url("/assets/images/4.jpg"); }
+    .img4 { background-image:  url("/assets/images/20.jpg"); }
+    .img5 { background-image: url("/assets/images/10.jpg"); }
+    .img6 { background-image:  url("/assets/images/30.png"); }
+
+    /* Position text in the middle of the page/image */
+    .bg-text {
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+      color: white;
+      font-weight: bold;
+      font-size: 80px;
+      border: 10px solid #f1f1f1;
+      position: fixed;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      width: 300px;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
   <app-root></app-root>
