@@ -4,9 +4,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## edit the app.component.html
 ## install bootstrap librarry
-### ng add @ng-bootstrap/ng-bootstrap --project notepad-ang-proj
+### `ng add @ng-bootstrap/ng-bootstrap --project notepad-ang-proj`
 ## add a component
-### ng g c components/header
+### `ng g c components/header`
 ### copy bootstrap navbar in header.component.html
 ### change the href to routerLink
 ### copy the header component selector from header.component.ts
@@ -14,8 +14,8 @@ for example : selector: 'app-header'; so copy the app-header
 ### now paste this selector name as a tag into the app.component.html
 for example : `<app-header></app-header>`
 ## add two components to navigate through routerLink
-### ng g c components/home
-### ng g c components/new-note
+### `ng g c components/home`
+### `ng g c components/new-note`
 ### add the corresponding routing path and component in the app-routing.modules.ts inside Routes array 
 for example :   
 { path:'home', component: HomeComponent },
