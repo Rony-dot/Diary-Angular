@@ -9,13 +9,13 @@
       <form>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Title goes here !</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <input [(ngModel)]="title" type="text" name="title"  class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
         <div class="mb-3">
           <label for="exampleFormControlTextarea1" class="form-label">How was your day !</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          <textarea [(ngModel)]="body" class="form-control" name="body" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-primary" (click)="saveNote()" >Save</button>
       </form>
     </div>
   </div>
