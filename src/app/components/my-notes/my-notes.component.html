@@ -1,59 +1,18 @@
-<div class="container my-3">
-  <div class="row">
-    <div class="col-md-12 mx-auto text-center">
-      <h2>Featured notes!</h2>
-    </div>
-  </div>
-  <div class="row my-3 border border-primary" >
-    <div class="col-md-12 mx-auto">
-      <div class="card text-center">
-        <div class="card-header">
-          Featured
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">What an amazing web app !</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-        <div class="card-footer text-muted">
-          2 days ago
-        </div>
+<div class="row">
+  <h4>My Notes</h4>
+</div>
+<div class="row">
+  <div class="col" *ngFor="let note of notes">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{note?.title}}</h5>
+        <p class="card-text">{{note?.body}}</p>
       </div>
-    </div>
-  </div>
-  <div class="row my-3 border border-warning" >
-    <div class="col-md-12 mx-auto">
-      <div class="card text-center">
-        <div class="card-header">
-          Featured
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">What an amazing web app !</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-        <div class="card-footer text-muted">
-          2 days ago
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row my-3 border border-success" >
-    <div class="col-md-12 mx-auto">
-      <div class="card text-center">
-        <div class="card-header">
-          Featured
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">What an amazing web app !</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-        <div class="card-footer text-muted">
-          2 days ago
-        </div>
+      <div class="card-footer">
+        <a class="btn btn-warning btn-sm" routerLink="/my-notes/{{ note.id }}">
+          Edit
+        </a>
       </div>
     </div>
   </div>
 </div>
-
