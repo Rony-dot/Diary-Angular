@@ -13,14 +13,12 @@ export class NoteDetailsComponent implements OnInit {
 
   // @ts-ignore
   noteModel : NoteModel = new NoteModel()
-  message = '';
 
   constructor(   private noteService: NoteService,
                  private route: ActivatedRoute,
                  private router: Router) {}
 
   ngOnInit(): void {
-    this.message = '';
     this.getNote(this.route.snapshot.params.id);
   }
 
@@ -36,4 +34,18 @@ export class NoteDetailsComponent implements OnInit {
         });
   }
 
+
+  updateNote() {
+    // @ts-ignore
+    this.noteService.update(this.noteModel.id, this.noteModel).subscribe(
+      data => {
+        console.log(data.status)
+        console.log(data)
+        this.router.navigate(['/my-notes']);
+      },
+      error => {
+        console.log(error)
+      }
+    );
+  }
 }
