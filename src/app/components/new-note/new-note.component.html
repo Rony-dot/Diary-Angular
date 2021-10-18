@@ -1,7 +1,7 @@
 <div class="container border border-primary my-5 py-3">
   <div class="row ">
     <div class="col-md-8 mx-auto text-center">
-      <h3>Add note!</h3>
+      <h3>Add note</h3>
     </div>
   </div>
   <div class="row">
@@ -15,10 +15,17 @@
           <label for="exampleFormControlTextarea1" class="form-label">How was your day !</label>
           <textarea [(ngModel)]="body" class="form-control" name="body" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
+
+        <div class="mb-3">
+          <label for="image" class="form-label">Image</label>
+          <input type="file" id="image" (change)="handleFileInput($event.target)"
+                 [accept]="validFileTypes" />
+        </div>
+
         <button type="submit" class="btn btn-primary" (click)="saveNote()" >Save</button>
       </form>
     </div>
   </div>
 </div>
 
-
+<bs-alert [alertMessage]="this.message" [alertType]="this.alertType" *ngIf="this.display"></bs-alert>

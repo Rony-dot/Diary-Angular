@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-bs-alert',
+  selector: 'bs-alert',
   templateUrl: './bs-alert.component.html',
   styleUrls: ['./bs-alert.component.css']
 })
 export class BsAlertComponent implements OnInit {
-  alertType: any;
-  alertMessage: any;
+  @Input() alertType: string = ''
+  @Input() alertMessage: string = '';
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  
+
 }

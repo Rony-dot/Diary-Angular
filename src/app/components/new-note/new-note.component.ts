@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NoteModel} from "../../models/noteModel";
 import {NoteService} from "../../services/note.service";
-import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-note',
@@ -14,10 +13,17 @@ export class NewNoteComponent implements OnInit {
   body : string =''
   // @ts-ignore
   noteModel : NoteModel = new NoteModel()
+  message: string = '';
+  alertType: string = '';
+  display: boolean = false;
+  validFileTypes = [
+    '.jpg',
+    '.jpeg',
+    '.png',
+  ];
+  image: any;
 
-  constructor(private noteService: NoteService,
-              private route: ActivatedRoute,
-              private router: Router) { }
+  constructor(private noteService: NoteService) { }
 
   ngOnInit(): void {
   }
@@ -25,16 +31,35 @@ export class NewNoteComponent implements OnInit {
   saveNote() {
     this.noteModel.title = this.title
     this.noteModel.body = this.body
-    this.noteService.saveNote(this.noteModel)
+    this.noteService.saveNote(this.noteModel, this.image)
       .subscribe(
         data => {
-          console.log(data.status)
-          console.log(data)
-          this.router.navigate(['/my-notes']);
+          // @ts-ignore
+          this.message = "Note Saved Successfully"
+          this.alertType = "success"
+          this.displayAction();
         },
         error => {
+          this.message = "Failed to save note"
+          this.alertType = "danger"
+          this.displayAction();
           console.log(error)
         }
       );
+  }
+
+  displayAction() {
+    setTimeout(() => {
+      this.display = false;
+    }, 2000);
+    this.display = true;
+  }
+
+  handleFileInput(target: any) {
+    const file = target.files.item(0);
+    if (!file) {
+      return;
+    }
+    this.image = file;
   }
 }

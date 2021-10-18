@@ -11,10 +11,9 @@ import { MyNotesComponent } from './components/my-notes/my-notes.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { BsAlertComponent } from './components/bs-alert/bs-alert.component';
-import { NoteDetailsComponent } from './components/note-details/note-details.component';
 
 @NgModule({
   declarations: [
@@ -26,12 +25,10 @@ import { NoteDetailsComponent } from './components/note-details/note-details.com
     LoginComponent,
     LogoutComponent,
     RegisterComponent,
-    BsAlertComponent,
-    NoteDetailsComponent
+    BsAlertComponent
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule ,
     AppRoutingModule,
     NgbModule,
     FormsModule,
