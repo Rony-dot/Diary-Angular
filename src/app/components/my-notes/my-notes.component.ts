@@ -24,4 +24,5 @@ export class MyNotesComponent implements OnInit {
       }
     )
   }
+
 }
