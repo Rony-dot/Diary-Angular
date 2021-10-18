@@ -48,4 +48,18 @@ export class NoteDetailsComponent implements OnInit {
       }
     );
   }
+
+  deleteNote() {
+    // @ts-ignore
+    this.noteService.deleteById(this.noteModel.id).subscribe(
+      data => {
+        console.log(data.status)
+        console.log(data)
+        this.router.navigate(['/my-notes']);
+      },
+      error => {
+        console.log(error)
+      }
+    )
+  }
 }
