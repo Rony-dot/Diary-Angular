@@ -11,6 +11,9 @@ import { MyNotesComponent } from './components/my-notes/my-notes.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
+import {FormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import { BsAlertComponent } from './components/bs-alert/bs-alert.component';
 
 @NgModule({
   declarations: [
@@ -21,14 +24,19 @@ import { RegisterComponent } from './components/register/register.component';
     MyNotesComponent,
     LoginComponent,
     LogoutComponent,
-    RegisterComponent
+    RegisterComponent,
+    BsAlertComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    HttpClientModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
