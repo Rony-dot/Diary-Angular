@@ -12,8 +12,13 @@ export class NoteService {
 
   constructor(private httpClient: HttpClient) { }
 
-  saveNote(noteModel: NoteModel): Observable<HttpResponse<NoteModel>> {
-    return this.httpClient.post<NoteModel>(environment.NOTE_SERVICE + '/add', noteModel,{observe : 'response'});
+
+  saveNote(noteModel: NoteModel, image: File): Observable<HttpResponse<NoteModel>> {
+    const formData = new FormData();
+    formData.append('title', noteModel.title);
+    formData.append('body', noteModel.body);
+    formData.append('image', image);
+    return this.httpClient.post<NoteModel>(environment.NOTE_SERVICE + '/add', formData,{observe : 'response'});
   }
 
   fetchMyNotes(): Observable<HttpResponse<NoteModel[]>> {
@@ -30,7 +35,11 @@ export class NoteService {
   }
 
   update(id : number, noteModel : NoteModel): Observable<HttpResponse<NoteModel>>{
-    return this.httpClient.put<NoteModel>(environment.NOTE_SERVICE+'/'+id,noteModel, {observe:'response'});
+    const formData = new FormData();
+    formData.append('title', noteModel.title);
+    formData.append('body', noteModel.body);
+    formData.append('image', noteModel.image);
+    return this.httpClient.put<NoteModel>(environment.NOTE_SERVICE+'/'+id,formData, {observe:'response'});
   }
 
 }

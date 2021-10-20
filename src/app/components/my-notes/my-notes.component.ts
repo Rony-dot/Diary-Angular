@@ -21,9 +21,8 @@ export class MyNotesComponent implements OnInit {
         console.log(data)
         this.notes = data.body ? data.body : []
       },
-      (error : HttpErrorResponse) => {
-        console.log(error);
-        alert(error.message);
+      error => {
+        console.log(error)
       }
     )
   }

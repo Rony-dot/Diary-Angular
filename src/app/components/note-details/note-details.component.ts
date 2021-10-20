@@ -13,6 +13,12 @@ export class NoteDetailsComponent implements OnInit {
 
   // @ts-ignore
   noteModel : NoteModel = new NoteModel()
+  validFileTypes = [
+    '.jpg',
+    '.jpeg',
+    '.png',
+  ];
+  image: any;
 
   constructor(   private noteService: NoteService,
                  private route: ActivatedRoute,
@@ -36,21 +42,37 @@ export class NoteDetailsComponent implements OnInit {
 
 
   updateNote() {
+    this.noteModel.image = this.image;
+    console.log(this.noteModel.body)
+    console.log(this.noteModel.title)
+    console.log(this.noteModel.image)
     // @ts-ignore
     this.noteService.update(this.noteModel.id, this.noteModel).subscribe(
       data => {
-        console.log(data.status)
-        console.log(data)
+        console.log("data status is : "+data.status)
+        console.log("data is : "+data)
+        console.log("data body is : "+data.body)
         this.router.navigate(['/my-notes']);
       },
       error => {
-        console.log(error)
+        console.log("error is :");
+        console.log(error);
       }
     );
   }
 
+
+  handleFileInput(target: any) {
+    const file = target.files.item(0);
+    if (!file) {
+      return;
+    }
+    this.image = file;
+  }
+
+
   deleteNote() {
-    // @ts-ignore
+
     this.noteService.deleteById(this.noteModel.id).subscribe(
       data => {
         console.log(data.status)

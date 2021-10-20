@@ -7,6 +7,7 @@
       <div class="card-body">
         <h5 class="card-title">{{note?.title}}</h5>
         <p class="card-text">{{note?.body}}</p>
+        <img src="data:image/png;base64,{{note.image}}" style="width: 100px" height="100px">
       </div>
       <div class="card-footer">
         <a class="btn btn-warning btn-sm" routerLink="/my-notes/{{ note.id }}">

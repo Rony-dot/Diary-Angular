@@ -1,7 +1,7 @@
 export  class NoteModel {
 
-  id : Number = 0
+  id : number = 0
   title : string = ''
   body : string = ''
-
+  image: any
 }

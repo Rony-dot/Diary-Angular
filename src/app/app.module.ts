@@ -11,6 +11,7 @@ import { MyNotesComponent } from './components/my-notes/my-notes.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
+
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { BsAlertComponent } from './components/bs-alert/bs-alert.component';

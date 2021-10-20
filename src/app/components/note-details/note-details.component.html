@@ -15,6 +15,13 @@
           <label for="exampleFormControlTextarea1" class="form-label">How was your day !</label>
           <textarea [(ngModel)]="noteModel.body" class="form-control" name="body" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
+        <div class="mb-3">
+          <img  src="data:image/png;base64,{{noteModel.image}}" style="width: 100px" height="100px">
+          <br>
+          <label for="image" class="form-label">Update Image </label> &nbsp;
+          <input  type="file" id="image" (change)="handleFileInput($event.target)"
+                 [accept]="validFileTypes" />
+        </div>
         <button type="submit" class="btn btn-primary" (click)="updateNote()" >Update</button>
         &nbsp;
         <button type="submit" class="btn btn-primary" (click)="deleteNote()" >Delete</button>
