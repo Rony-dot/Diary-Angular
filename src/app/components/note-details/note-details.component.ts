@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {NoteModel} from "../../models/noteModel";
 import {NoteService} from "../../services/note.service";
-import {ActivatedRoute, Router} from "@angular/router";
 import {HttpResponse} from "@angular/common/http";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-note-details',

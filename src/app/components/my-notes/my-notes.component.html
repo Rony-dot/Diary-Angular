@@ -5,7 +5,6 @@
   <div class="col"  *ngFor="let note of notes">
     <div class="card" style="width: 18rem;">
       <div class="card-body">
-<<<<<<< HEAD
         <h5 class="card-title">{{note?.title}}</h5>
         <p class="card-text">{{note?.body}}</p>
         <img src="data:image/png;base64,{{note.image}}" style="width: 100px" height="100px">
@@ -14,11 +13,6 @@
         <a class="btn btn-warning btn-sm" routerLink="/my-notes/{{ note.id }}">
           Edit
         </a>
-=======
-        <h5 class="card-title">{{note.title}}</h5>
-        <p class="card-text">{{note.body}}</p>
-        <img src="data:image/png;base64,{{note.image}}" style="width: 100px" height="100px">
->>>>>>> 72f613e07b9fc80fe6a6eb39c7d58d4a89a59d7f
       </div>
     </div>
   </div>

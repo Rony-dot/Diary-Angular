@@ -43,19 +43,17 @@ export class NewNoteComponent implements OnInit {
           this.message = "Failed to save note"
           this.alertType = "danger"
           this.displayAction();
-          console.log(error)
+          // @ts-ignore
+          console.log(error);
         }
       );
   }
 
   displayAction() {
+    // @ts-ignore
     setTimeout(() => {
       this.display = false;
-<<<<<<< HEAD
     }, 5000);
-=======
-    }, 2000);
->>>>>>> 72f613e07b9fc80fe6a6eb39c7d58d4a89a59d7f
     this.display = true;
   }
 
@@ -66,8 +64,4 @@ export class NewNoteComponent implements OnInit {
     }
     this.image = file;
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> 72f613e07b9fc80fe6a6eb39c7d58d4a89a59d7f
 }
