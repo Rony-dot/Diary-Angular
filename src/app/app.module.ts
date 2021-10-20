@@ -36,7 +36,8 @@ import {NoteDetailsComponent} from "./components/note-details/note-details.compo
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     HttpClientModule
