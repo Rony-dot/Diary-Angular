@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../../services/user.service";
+import {Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -7,9 +10,52 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  loginForm: FormGroup = new FormGroup({}, [], [])
+  submitted = false;
+  loading = false;
+
+  constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+    })
+
+    if (this.userService.currentUserValue !== null
+      && this.userService.currentUserValue !== undefined) {
+      window.location.href = '/my-notes'
+    }
   }
 
+  get f() {
+    return this.loginForm.controls
+  }
+
+
+  login() {
+    this.submitted = true;
+    if (this.loginForm?.invalid) {
+      return;
+    }
+    this.loading = true;
+    // @ts-ignore
+    try {
+      // @ts-ignore
+      this.userService.login(this.f.email.value, this.f.password.value)
+        .subscribe(
+          data => {
+            console.log(data);
+            window.location.href = '/my-notes'
+          },
+          error => {
+            console.log(error)
+          });
+    } catch (e) {
+      this.loading = false;
+      alert(e.message)
+      console.log(e)
+    }
+  }
 }
