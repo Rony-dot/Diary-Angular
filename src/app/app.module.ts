@@ -11,11 +11,14 @@ import { MyNotesComponent } from './components/my-notes/my-notes.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { RegisterComponent } from './components/register/register.component';
+<<<<<<< HEAD
 
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+=======
+import {FormsModule} from "@angular/forms";
+>>>>>>> 72f613e07b9fc80fe6a6eb39c7d58d4a89a59d7f
 import {HttpClientModule} from "@angular/common/http";
 import { BsAlertComponent } from './components/bs-alert/bs-alert.component';
-import { NoteDetailsComponent } from './components/note-details/note-details.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +30,10 @@ import { NoteDetailsComponent } from './components/note-details/note-details.com
     LoginComponent,
     LogoutComponent,
     RegisterComponent,
-    BsAlertComponent,
-    NoteDetailsComponent
+    BsAlertComponent
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule ,
     AppRoutingModule,
     NgbModule,
     FormsModule,

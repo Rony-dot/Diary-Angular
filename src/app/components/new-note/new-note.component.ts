@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NoteModel} from "../../models/noteModel";
 import {NoteService} from "../../services/note.service";
-import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-new-note',
@@ -24,9 +23,7 @@ export class NewNoteComponent implements OnInit {
   ];
   image: any;
 
-  constructor(private noteService: NoteService,
-              private route: ActivatedRoute,
-              private router: Router) { }
+  constructor(private noteService: NoteService) { }
 
   ngOnInit(): void {
   }
@@ -54,7 +51,11 @@ export class NewNoteComponent implements OnInit {
   displayAction() {
     setTimeout(() => {
       this.display = false;
+<<<<<<< HEAD
     }, 5000);
+=======
+    }, 2000);
+>>>>>>> 72f613e07b9fc80fe6a6eb39c7d58d4a89a59d7f
     this.display = true;
   }
 
@@ -65,5 +66,8 @@ export class NewNoteComponent implements OnInit {
     }
     this.image = file;
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 72f613e07b9fc80fe6a6eb39c7d58d4a89a59d7f
 }

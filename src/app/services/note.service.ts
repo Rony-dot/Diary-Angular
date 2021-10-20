@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {NoteModel} from "../models/noteModel";
 import {environment} from "../../environments/environment";
-import {Observable} from 'rxjs';
-
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +11,10 @@ export class NoteService {
 
   constructor(private httpClient: HttpClient) { }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 72f613e07b9fc80fe6a6eb39c7d58d4a89a59d7f
   saveNote(noteModel: NoteModel, image: File): Observable<HttpResponse<NoteModel>> {
     const formData = new FormData();
     formData.append('title', noteModel.title);
@@ -25,6 +27,7 @@ export class NoteService {
     // @ts-ignore
     return this.httpClient.get<NoteModel[]>(environment.NOTE_SERVICE + '/all',{observe : 'response'});
   }
+<<<<<<< HEAD
 
   getById(id: string): Observable<HttpResponse<NoteModel>>{
     return this.httpClient.get<NoteModel>(environment.NOTE_SERVICE+'/'+id, {observe:'response'});
@@ -42,4 +45,6 @@ export class NoteService {
     return this.httpClient.put<NoteModel>(environment.NOTE_SERVICE+'/'+id,formData, {observe:'response'});
   }
 
+=======
+>>>>>>> 72f613e07b9fc80fe6a6eb39c7d58d4a89a59d7f
 }

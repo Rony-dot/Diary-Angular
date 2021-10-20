@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NoteModel} from "../../models/noteModel";
 import {NoteService} from "../../services/note.service";
-import {HttpErrorResponse} from "@angular/common/http";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-my-notes',
@@ -13,7 +11,7 @@ export class MyNotesComponent implements OnInit {
   // @ts-ignore
   notes: NoteModel[];
 
-  constructor(private noteService: NoteService, private router: Router) { }
+  constructor(private noteService: NoteService) { }
 
   ngOnInit(): void {
     this.noteService.fetchMyNotes().subscribe(
@@ -26,4 +24,5 @@ export class MyNotesComponent implements OnInit {
       }
     )
   }
+
 }
