@@ -3,7 +3,7 @@ import {HttpClient, HttpResponse} from "@angular/common/http";
 import {NoteModel} from "../models/noteModel";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
-
+// @ts-ignore
 @Injectable({
   providedIn: 'root'
 })

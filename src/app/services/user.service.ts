@@ -3,7 +3,12 @@ import {BehaviorSubject, Observable} from "rxjs";
 import {UserModel} from "../models/userModel";
 import {CookieService} from "ngx-cookie-service";
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpResponse} from "@angular/common/http";
+import {environment} from "../../environments/environment";
+import {NoteModel} from "../models/noteModel";
+import {userLoginModel} from "../models/userLoginModel";
+import {observeTriggers} from "@ng-bootstrap/ng-bootstrap/util/triggers";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +20,9 @@ export class UserService implements CanActivate {
   public currentUser$ : Observable<UserModel>;
   static USER_INFO = 'USER_INFO';
 
+
   constructor(private cookieService: CookieService, private router: Router, private httpClient: HttpClient) {
-    const  jsonString = this.cookieService.get(UserService.USER_INFO);
+    const jsonString = this.cookieService.get(UserService.USER_INFO);
     if (jsonString === '') {
       // @ts-ignore
       this.userInfoSubject = new BehaviorSubject<UserModel>(null);
@@ -72,6 +78,31 @@ export class UserService implements CanActivate {
 
   }
 
+  login(username : string, password : string) : Observable<HttpResponse<UserModel>>{
+    const userLoginData = new userLoginModel();
+    userLoginData.username = username
+    userLoginData.password = password
+
+    let observableUser = this.httpClient.post<userLoginModel>(environment.BASE_URL + '/login', userLoginData,{observe : 'response'});
+
+    observableUser.subscribe(data =>{
+      // copied form previous approach of authentication
+      const userModel = new UserModel()
+      userModel.username = username
+      userModel.email = 'rony@gmail.com'
+      userModel.token = 'test-token'
+      // @ts-ignore
+      this.userInfoSubject.next(userModel);
+      this.cookieService.set(UserService.USER_INFO, JSON.stringify(userModel));
+      return observableUser;
+    }, error => {
+      return null;
+    });
+    return observableUser;
+  }
+
+/*
+
   login(email: string, password: string): Observable<UserModel> | null {
     const url = '/user/login';
     if (email === 'rony@gmail.com' && password === 'secret') {
@@ -90,26 +121,35 @@ export class UserService implements CanActivate {
     } else {
       throw new Error("Failed to log in")
     }
-    /*return this.httpClient.post<UserModel>(environment.AUTH_SERVER + url, {username, password})
+    /!*return this.httpClient.post<UserModel>(environment.AUTH_SERVER + url, {username, password})
       .pipe(
         map(userModel => {
           this.cookieService.set(UserService.USER_INFO, JSON.stringify(userModel));
           this.userInfoSubject.next(userModel);
           return userModel;
         })
-      );*/
+      );*!/
   }
+*/
+
+
+
 
   // @ts-ignore
-  registerUser(formData: any): Observable<UserModel> {
+  registerUser(userDataModel : userModel): Observable<HttpResponse<UserModel>> {
+    // Todo work for registration here
+
+    return this.httpClient.post<UserModel>(environment.BASE_URL + '/register', userDataModel,{observe : 'response'});
+
+
     /*const url = '/user/create';
-    return this.httpClient.post<UserModel>(environment.AUTH_SERVER + url, formData)
-      .pipe(
-        map(userModel => {
-          this.cookieService.set(AuthenticationService.USER_INFO, JSON.stringify(userModel));
-          this.userInfoSubject.next(userModel);
-          return userModel;
-        })
-      );*/
+      return this.httpClient.post<UserModel>(environment.AUTH_SERVER + url, formData)
+        .pipe(
+          map(userModel => {
+            this.cookieService.set(AuthenticationService.USER_INFO, JSON.stringify(userModel));
+            this.userInfoSubject.next(userModel);
+            return userModel;
+          })
+        );*/
   }
 }

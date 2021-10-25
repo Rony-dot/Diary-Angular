@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     })
 
@@ -46,15 +46,20 @@ export class LoginComponent implements OnInit {
       this.userService.login(this.f.email.value, this.f.password.value)
         .subscribe(
           data => {
+            console.log("data")
             console.log(data);
+            console.log("body")
+            console.log(data.body);
             window.location.href = '/my-notes'
           },
           error => {
+            console.log("error")
             console.log(error)
           });
     } catch (e) {
       this.loading = false;
       alert(e.message)
+      console.log("catch error")
       console.log(e)
     }
   }

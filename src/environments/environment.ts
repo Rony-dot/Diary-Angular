@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  NOTE_SERVICE: 'http://localhost:8080/notes'
+  NOTE_SERVICE: 'http://localhost:8080/notes',
+  BASE_URL : 'http://localhost:8080',
+  USER_SERVICE : 'http://localhost:8080/users'
 };
 
 /*
