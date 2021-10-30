@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UserModel} from "../../models/userModel";
 
 @Component({
   selector: 'app-login',
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({}, [], [])
   submitted = false;
   loading = false;
+  userDataModel = new UserModel();
 
   constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder) { }
 
@@ -50,6 +52,8 @@ export class LoginComponent implements OnInit {
             console.log(data);
             console.log("body")
             console.log(data.body);
+            this.userDataModel = data.body? data.body : new UserModel();
+            localStorage.setItem('jwtToken', this.userDataModel.jwtToken ? this.userDataModel.jwtToken : '');
             window.location.href = '/my-notes'
           },
           error => {

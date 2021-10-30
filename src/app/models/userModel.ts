@@ -3,7 +3,6 @@ export  class UserModel {
   name ?: string
   username ?: string
   email ?: string
-  token ?: string
   roles ?: string[]
   password ?: string
   age ?: number
@@ -12,4 +11,5 @@ export  class UserModel {
   dateOfBirth ?: string
   salutation ?: string
   countryCode ?: string
+  jwtToken ?: string
 }

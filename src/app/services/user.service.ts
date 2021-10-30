@@ -19,6 +19,7 @@ export class UserService implements CanActivate {
   private userInfoSubject ?: BehaviorSubject<UserModel>;
   public currentUser$ : Observable<UserModel>;
   static USER_INFO = 'USER_INFO';
+  userDataModel = new UserModel()
 
 
   constructor(private cookieService: CookieService, private router: Router, private httpClient: HttpClient) {
@@ -47,7 +48,8 @@ export class UserService implements CanActivate {
     if (this.currentUserValue != null) {
       return true;
     } else {
-      location.href = '/login'
+      location.href
+         = '/login'
       return false;
     }
   }
@@ -85,15 +87,11 @@ export class UserService implements CanActivate {
 
     let observableUser = this.httpClient.post<userLoginModel>(environment.BASE_URL + '/login', userLoginData,{observe : 'response'});
 
-    observableUser.subscribe(data =>{
-      // copied form previous approach of authentication
-      const userModel = new UserModel()
-      userModel.username = username
-      userModel.email = 'rony@gmail.com'
-      userModel.token = 'test-token'
+     observableUser.subscribe(data =>{
+      this.userDataModel = data.body ? data.body : new UserModel()
       // @ts-ignore
-      this.userInfoSubject.next(userModel);
-      this.cookieService.set(UserService.USER_INFO, JSON.stringify(userModel));
+      this.userInfoSubject.next(this.userDataModel);
+      this.cookieService.set(UserService.USER_INFO, JSON.stringify(this.userDataModel));
       return observableUser;
     }, error => {
       return null;

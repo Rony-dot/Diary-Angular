@@ -7,8 +7,10 @@
   <div class="row">
     <div class="col-md-6 mx-auto">
       <form (ngSubmit)="login()" [formGroup]="loginForm">
+
+        <!--        user name   -->
         <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
+          <label for="email" class="form-label">User Name</label>
           <input type="email" formControlName="email" [ngClass]="{'is-invalid': submitted && f.email.errors}" class="form-control" id="email" >
           <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
             <div *ngIf="f.email.errors.required">Email address is required</div>
@@ -16,6 +18,7 @@
           </div>
         </div>
 
+        <!--        password    -->
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
           <input type="password" [ngClass]="{'is-invalid': submitted && f.password.errors }" formControlName="password" class="form-control" id="password">

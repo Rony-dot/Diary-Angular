@@ -14,9 +14,10 @@ import { RegisterComponent } from './components/register/register.component';
 
 import {ReactiveFormsModule} from "@angular/forms";
 import {FormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { BsAlertComponent } from './components/bs-alert/bs-alert.component';
 import {NoteDetailsComponent} from "./components/note-details/note-details.component";
+import { AuthInterceptorService } from "./services/auth-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,12 @@ import {NoteDetailsComponent} from "./components/note-details/note-details.compo
     ReactiveFormsModule
   ],
   providers: [
-    HttpClientModule
+    HttpClientModule,
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : AuthInterceptorService,
+      multi : true
+    }
   ],
   bootstrap: [AppComponent]
 })
