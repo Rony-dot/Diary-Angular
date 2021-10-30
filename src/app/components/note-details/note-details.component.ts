@@ -3,6 +3,7 @@ import {NoteModel} from "../../models/noteModel";
 import {NoteService} from "../../services/note.service";
 import {HttpResponse} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-note-details',
@@ -19,27 +20,66 @@ export class NoteDetailsComponent implements OnInit {
     '.png',
   ];
   image: any;
+  canEdit : boolean = false;
+  canDelete : boolean = false;
+  isAdmin : boolean = false;
+
 
   constructor(   private noteService: NoteService,
+                 private userService : UserService,
                  private route: ActivatedRoute,
                  private router: Router) {}
 
   ngOnInit(): void {
     this.getNote(this.route.snapshot.params.id);
+    // this.getPermission();
   }
 
-  getNote(id: string): void {
+  getNote(id: string): NoteModel {
     this.noteService.getById(id)
       .subscribe(
-        data => {
-          this.noteModel = data.body? data.body : new NoteModel();
-          console.log(data);
+        note  => {
+          this.userService.currentUser$.subscribe( user =>{
+            if(note.body?.userId == user.id ){
+              this.canEdit = true;
+              this.canDelete = true;
+            }
+            if(user.roles?.includes("ADMIN")){
+              this.canDelete = true;
+              this.canEdit = true;
+              this.isAdmin = true;
+            }
+          }, error =>{
+
+          });
+          this.noteModel = note.body? note.body : new NoteModel();
+
         },
         error => {
           console.log(error);
         });
+    return this.noteModel;
   }
 
+  getPermission(){
+    console.log("node model userid : "+this.noteModel.userId)
+    // console.log("note model : "+this.noteModel.userId)
+    this.userService.currentUser$.subscribe(user => {
+      if(this.noteModel.userId == user.id){
+        alert(this.noteModel.userId + " "+ user.id);
+        console.log(this.noteModel.userId +" "+ user.id)
+        this.canDelete = true;
+        this.canEdit = true;
+      }else{
+        alert(this.noteModel.userId + " "+ user.id);
+        console.log(this.noteModel.userId +" "+ user.id)
+      }
+    }, error => {
+      this.canDelete = false;
+      this.canEdit = false;
+    });
+
+  }
 
   updateNote() {
     this.noteModel.image = this.image;

@@ -20,6 +20,7 @@ export class UserService implements CanActivate {
   public currentUser$ : Observable<UserModel>;
   static USER_INFO = 'USER_INFO';
   userDataModel = new UserModel()
+  private isAdmin: boolean = false;
 
 
   constructor(private cookieService: CookieService, private router: Router, private httpClient: HttpClient) {
@@ -48,8 +49,7 @@ export class UserService implements CanActivate {
     if (this.currentUserValue != null) {
       return true;
     } else {
-      location.href
-         = '/login'
+      location.href = '/login'
       return false;
     }
   }
@@ -132,6 +132,16 @@ export class UserService implements CanActivate {
 
 
 
+  checkAdmin() : boolean {
+    this.currentUser$.subscribe(user =>{
+      if(user.roles?.includes("ADMIN")){
+        this.isAdmin = true;
+      }
+    }, error => {
+
+    });
+    return  this.isAdmin;
+  }
 
   // @ts-ignore
   registerUser(userDataModel : userModel): Observable<HttpResponse<UserModel>> {

@@ -22,9 +22,9 @@
           <input  type="file" id="image" (change)="handleFileInput($event.target)"
                  [accept]="validFileTypes" />
         </div>
-        <button type="submit" class="btn btn-primary" (click)="updateNote()" >Update</button>
+        <button [disabled]="!canEdit" type="submit" class="btn btn-primary" (click)="updateNote()" >Update</button>
         &nbsp;
-        <button type="submit" class="btn btn-primary" (click)="deleteNote()" >Delete</button>
+        <button [disabled]="!canDelete"  type="submit" class="btn btn-primary" (click)="deleteNote()" >Delete</button>
       </form>
     </div>
   </div>

@@ -9,11 +9,18 @@
         <p class="card-text">{{note?.body}}</p>
         <img src="data:image/png;base64,{{note.image}}" style="width: 100px" height="100px">
       </div>
-      <div class="card-footer">
-        <a class="btn btn-warning btn-sm" routerLink="/my-notes/{{ note.id }}">
+      <div class="card-footer" >
+        <a *ngIf="userId == note.userId else elseTemplateName"
+           class="btn btn-warning btn-sm" routerLink="/my-notes/{{ note.id }}">
           Edit
         </a>
+        <ng-template #elseTemplateName>
+          <a class="btn btn-warning btn-sm" routerLink="/my-notes/{{ note.id }}">
+            View
+          </a>
+        </ng-template>
       </div>
+
     </div>
   </div>
 </div>

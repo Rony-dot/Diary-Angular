@@ -4,5 +4,5 @@ export  class NoteModel {
   title : string = ''
   body : string = ''
   image: any
-
+  userId ?: number;
 }

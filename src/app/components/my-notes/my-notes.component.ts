@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NoteModel} from "../../models/noteModel";
 import {NoteService} from "../../services/note.service";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-my-notes',
@@ -10,8 +11,12 @@ import {NoteService} from "../../services/note.service";
 export class MyNotesComponent implements OnInit {
   // @ts-ignore
   notes: NoteModel[];
+  myThing : boolean = false;
+  userId ?: number;
+  isAdmin : boolean = false;
 
-  constructor(private noteService: NoteService) { }
+
+  constructor(private noteService: NoteService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.noteService.fetchMyNotes().subscribe(
@@ -23,6 +28,16 @@ export class MyNotesComponent implements OnInit {
         console.log(error)
       }
     )
+
+    this.userService.currentUser$.subscribe( user =>{
+      this.userId = user.id;
+      if(user.roles?.includes("ADMIN")){
+        this.isAdmin = true;
+      }
+    }, error => {
+      this.userId = -1;
+    });
+
   }
 
 }

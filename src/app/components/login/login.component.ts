@@ -54,6 +54,9 @@ export class LoginComponent implements OnInit {
             console.log(data.body);
             this.userDataModel = data.body? data.body : new UserModel();
             localStorage.setItem('jwtToken', this.userDataModel.jwtToken ? this.userDataModel.jwtToken : '');
+            if(this.userDataModel.roles?.includes("ADMIN")){
+              localStorage.setItem('isAdmin', 'admin');
+            }
             window.location.href = '/my-notes'
           },
           error => {
